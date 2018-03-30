@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Knowledge Exam Pro - Dialog</title>
+
+        <link rel="stylesheet" href="mdl/material.min.css">
+        <script src="mdl/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+        <link rel="stylesheet" href="./style.css" />
+    </head>
+
+    <body>
+
+        <h5>Subjects - with Dialog</h5>
+
+        <dialog class="mdl-dialog" style="width: 500px">
+            <div>
+                <h6 class="mdl-dialog__title">Add a new subject</h6>
+                <br/>
+                <div>
+                    <table class="mdl-data-table mdl-js-data-table">
+                        <tbody>
+                            <tr>
+                                <td >
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input id="txtSubject" class="mdl-textfield__input" type="text" id="sample1">
+                                        <label class="mdl-textfield__label" for="sample1">Subject...</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <div class="mdl-textfield mdl-js-textfield">
+                                        <input id="txtDescription" class="mdl-textfield__input" type="text" id="sample1">
+                                        <label class="mdl-textfield__label" for="sample1">Description...</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+                <div class="mdl-dialog__actions" style="width: 350px">
+                    <button type="button" class="mdl-button create">Add</button>
+                    <button type="button" class="mdl-button close">Cancel</button>
+                </div>
+            </div>
+        </dialog>
+
+        <br/>
+
+        <div class="mdl-button-group">
+
+            <button id="btnList" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                List
+            </button>
+            <button id="btnCreate" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Create
+            </button>
+            <button id="btnModify" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Modify
+            </button>
+            <button id="btnDelete" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                Delete
+            </button>
+        </div>
+
+        <br/>
+        <br/>
+
+        <table id="tableSubjects" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Subject</th>
+                    <th class="mdl-data-table__cell--non-numeric">Description</th>
+                </tr>
+            </thead>
+            <tbody id="tableSubjectsBody" >
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Mathe</td>
+                    <td class="mdl-data-table__cell--non-numeric">Yeaaaah</td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">C++</td>
+                    <td class="mdl-data-table__cell--non-numeric">Beyond C</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-app.js"></script>    -->
+        <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-auth.js"></script>   -->
+
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCghee9cFypM0vVNrWve0LV9ZknwKBcaOo",
+                authDomain: "knowledgeexampro.firebaseapp.com",
+                databaseURL: "https://knowledgeexampro.firebaseio.com",
+                projectId: "knowledgeexampro",
+                storageBucket: "knowledgeexampro.appspot.com",
+                messagingSenderId: "965802398826"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script src="index2.js"></script>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+body{
+    width: 88%;
+    padding-top:100px;
+    margin: 0 auto;
+}
+
+
+.mdl-button-group{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+
+    button{
+        /* background-color: #eee;  */
+        background-color: aqua;
+
+        display: inline-block;
+        float: left;
+        margin: 0px;
+        box-shadow: none;
+        border-radius: 0px;
+    }
+
+    button:hover {
+        color: green;
+    }
+
+}
+
+<!-- Simple list -->
+<style>
+.demo-list-item {
+    width: 300px;
+}
+</style>
+
+<style>
+    li:hover {
+        background-color: yellow;
+        color: red;
+    }
+
+    p:hover, h5:hover, a:hover {
+        background-color: yellow;
+        color: red;
+    }
+</style>
+
+<style>
+li.mdl-list__item:hover {
+    background-color: yellow;
+    color: red;
+}
+</style>
+
+<style>
+span.mdl-list__item-primary-content:hover {
+    background-color: yellow;
+    color: red;
+}
+</style>
