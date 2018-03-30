@@ -8,7 +8,6 @@
 /*eslint no-console: [ "error", { allow: [  "log", "warn", "error"]}] */
 
 // retrieve HTML elements
-var btnList = document.getElementById('btnList');
 var btnCreate = document.getElementById('btnCreate');
 var btnDelete = document.getElementById('btnDelete');
 
@@ -42,14 +41,23 @@ dialog.querySelector('.create').addEventListener('click', () => {
 // HTML elements - ToDo list
 var htmlTableSubjects = document.getElementById('tableSubjectsBody');
 
+htmlTableSubjects.onclick = function(ev) {
+   // ev.target <== td element
+   // ev.target.parentElement <== tr
+   var index = ev.target.parentElement.rowIndex;
+
+    console.log("TR TR TR  Yeahhhhhhhh: " + index);
+}
+
+
+
+
 // get a reference to the database service
 var db = firebase.database();
 
 // local state of current 'todo' items list
 var subjectsList = [];
 
-// ======================================================================
-// connect event handler functions
 
 // ======================================================================
 // connect event handler functions
@@ -58,28 +66,18 @@ var subjectsList = [];
 // helper functions
 db.ref('/subjects').on('value', (snapshot) => {
 
+    subjectsList = [];
+
     snapshot.forEach(function (childSnapshot) {
 
         var obj = childSnapshot.val();
 
         // enter todo item into list
-        console.log("Found " + obj.name);
-        //subjectsList.push(obj.name);
+        console.log("Found: Name = " + obj.name + ", Description: " + obj.description);
+        subjectsList.push({ "Name" : obj.name, "Description" : obj.description});
     });
-});
 
-
-
-
-
-
-
-btnList.addEventListener('click', () => {
-
-    'use strict';
-
-    readSubjectsList();
-
+    fillSubjectsList (subjectsList);
 });
 
 btnCreate.addEventListener('click', () => {
@@ -115,49 +113,40 @@ function addTodoSubject(name, description) {
     });
 }
 
-function readSubjectsList() {
+function fillSubjectsList(subjectsList) {
 
     'use strict';
-    subjectsList = [];
 
-    var refstring = '/subjects';
-    db.ref(refstring).once('value').then(function (snapshot) {
+    htmlTableSubjects.innerHTML = '';
 
-        snapshot.forEach(function (childSnapshot) {
+    for (var i = 0; i < subjectsList.length; i++) {
 
-            var obj = childSnapshot.val();
+        // build list item string
+        var linePrefix = (i < 10) ? '  ' : (i < 100) ? ' ' : '',
+            line = linePrefix + (i+1) + ': ' + subjectsList[i].Name;
 
-            // enter todo item into list
-            console.log("Found " + obj.name);
-            subjectsList.push(obj.name);
-        });
+        var node = document.createElement('tr');          // create a <tr> node
 
-        htmlTableSubjects.innerHTML = '';
+//        node.addEventListener('click', function () {
+//
+//            'use strict';
+//
+//            console.log("tr tr tr Yeahhhhhhhh");
+//        });
 
-        for (var i = 0; i < subjectsList.length; i++) {
+        var td1 = document.createElement('td');           // create first <td> node
+        td1.setAttribute('class', 'mdl-data-table__cell--non-numeric');
+        var td2 = document.createElement('td');           // create first <td> node
+        td2.setAttribute('class', 'mdl-data-table__cell--non-numeric');
 
-            // build list item string
-            var linePrefix = (i < 10) ? '  ' : (i < 100) ? ' ' : '',
-                line = linePrefix + (i+1) + ': ' + subjectsList[i];
+        var textnode1 = document.createTextNode(line);    // create first text node
+        var textnode2 = document.createTextNode(subjectsList[i].Description);    // create second text node
+        node.appendChild(td1);                            // append <td> to <tr>
+        node.appendChild(td2);                            // append <td> to <tr>
+        td1.appendChild(textnode1);                       // append text to <td>
+        td2.appendChild(textnode2);                       // append text to <td>
+        htmlTableSubjects.appendChild(node);              // append <tr> to <tbody>
+    }
 
-            // add a 'material design lite' node to a table dynamically
-            var node = document.createElement('tr');         // create a <tr> node
-            //            node.setAttribute('class', 'mdl-list__item');    // set an attribute
-
-            var td1 = document.createElement('td');       // create first <td> node
-            td1.setAttribute('class', 'mdl-data-table__cell--non-numeric');
-            var td2 = document.createElement('td');       // create first <td> node
-            td2.setAttribute('class', 'mdl-data-table__cell--non-numeric');
-
-            var textnode1 = document.createTextNode(line);    // create first text node
-            var textnode2 = document.createTextNode('bla blubber bla');    // create second text node
-            node.appendChild(td1);                            // append <td> to <tr>
-            node.appendChild(td2);                            // append <td> to <tr>
-            td1.appendChild(textnode1);                       // append text to <td>
-            td2.appendChild(textnode2);                       // append text to <td>
-            htmlTableSubjects.appendChild(node);              // append <tr> to <tbody>
-        }
-
-        componentHandler.upgradeDom();
-    });
+    componentHandler.upgradeDom();
 }
