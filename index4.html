@@ -8,12 +8,12 @@
         <script src="mdl/material.min.js"></script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-        <link rel="stylesheet" href="style3.css" />
+        <link rel="stylesheet" href="style4.css" />
     </head>
 
     <body>
 
-        <h5>Subjects - Variant 3</h5>
+        <h5>Subjects - Variant 4</h5>
 
         <dialog id="dialogCreation"  class="mdl-dialog" style="width: 500px">
             <div>
@@ -86,34 +86,58 @@
 
         <br/>
 
-        <div class="mdl-button-group">
+        <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
 
-            <button id="btnCreate" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                Create
-            </button>
-            <button id="btnModify" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                Modify
-            </button>
-            <button id="btnDelete" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-                Delete
-            </button>
+            <div class="mdl-tabs__tab-bar">
+                <a href="#about-panel" class="mdl-tabs__tab is-active">Courses (Kurse)</a>
+                <a href="#members-panel" class="mdl-tabs__tab">Exams (Prüfungne)</a>
+                <a href="#albums-panel" class="mdl-tabs__tab">Students (Studenten)</a>
+                <a href="#questions-panel" class="mdl-tabs__tab">Questions (Fragen)</a>
+            </div>
+
+            <div class="mdl-tabs__panel is-active" id="about-panel">
+                <br/>
+                <p><b>The Beatles</b> were a four-piece musical group from Liverpool, England.
+                    Formed in 1960, their career spanned just over a decade, yet they are widely
+                    regarded as the most influential band in history.</p>
+                <p>Their songs are among the best-loved music of all time. It is said that every
+                    minute of every day, a radio station somewhere is playing a Beatles song.</p>
+            </div>
+            <div class="mdl-tabs__panel" id="members-panel">
+                <br/>
+                <p>The Beatles' members were:</p>
+                <ul>
+                    <li>John Lennon (1940-1980)</li>
+                    <li>Paul McCartney (1942-)</li>
+                    <li>George Harrison (1943-2001)</li>
+                    <li>Ringo Starr (1940-)</li>
+                </ul>
+            </div>
+            <div class="mdl-tabs__panel" id="questions-panel">
+                <br/>
+
+                <p>Yeahhhhhhhhhhhh</p>
+
+            </div>
+            <div class="mdl-tabs__panel" id="albums-panel">
+                <br/>
+                <p>The Beatles' original UK LPs, in order of release:</p>
+                <ol>
+                    <li>Please Please Me (1963)</li>
+                    <li>With the Beatles (1963)</li>
+                    <li>A Hard Day's Night (1964)</li>
+                    <li>Beatles for Sale (1964)</li>
+                    <li>Help! (1965)</li>
+                    <li>Rubber Soul (1965)</li>
+                    <li>Revolver (1966)</li>
+                    <li>Sgt. Pepper's Lonely Hearts Club Band (1967)</li>
+                    <li>The Beatles ("The White Album", 1968)</li>
+                    <li>Yellow Submarine (1969)</li>
+                    <li>Abbey Road (1969)</li>
+                    <li>Let It Be (1970)</li>
+                </ol>
+            </div>
         </div>
-
-        <br/>
-        <br/>
-
-        <table id="tableSubjects" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-            <thead>
-                <tr>
-                    <th class="mdl-data-table__cell--non-numeric">Subject</th>
-                    <th class="mdl-data-table__cell--non-numeric">Description</th>
-                </tr>
-            </thead>
-            <tbody id="tableSubjectsBody" >
-            </tbody>
-        </table>
-
-
         <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
         <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-app.js"></script>    -->
         <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-auth.js"></script>   -->
@@ -131,6 +155,6 @@
             firebase.initializeApp(config);
         </script>
 
-        <script src="index3.js"></script>
+        <script src="index4.js"></script>
     </body>
 </html>
