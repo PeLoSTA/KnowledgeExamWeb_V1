@@ -1,0 +1,13 @@
+body {
+    width: 95%;
+    padding-top:50px;
+    margin: 0 auto;
+}
+
+.mdl-tabs__tab-bar  {
+    justify-content: flex-start;
+}
+
+#labelNumAnswers {
+    width: 150px;
+}
