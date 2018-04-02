@@ -22,6 +22,8 @@ var divCorrectAnswers = document.getElementById('anchorCorrectAnswers');
 
 var textareaQuestion = document.getElementById('textareaQuestion');
 
+var labelNumAnswers = document.getElementById('labelNumAnswers2');
+
 var numAnswers = 2;
 createAnswersList(numAnswers, divAnchorAnswers);
 createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
@@ -30,51 +32,44 @@ listItem2.addEventListener('click', () => {
 
     'use strict';
     numAnswers = 2;
-    createAnswersList(numAnswers, divAnchorAnswers);
-    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
+    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
 });
 
 listItem3.addEventListener('click', () => {
 
     'use strict';
     numAnswers = 3;
-    createAnswersList(numAnswers, divAnchorAnswers);
-    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
+    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
 });
 
 listItem4.addEventListener('click', () => {
 
     'use strict';
     numAnswers = 4;
-    createAnswersList(numAnswers, divAnchorAnswers);
-    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
+    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
 });
 
 listItem5.addEventListener('click', () => {
 
     'use strict';
     numAnswers = 5;
-    createAnswersList(numAnswers, divAnchorAnswers);
-    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
+    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
 });
 
 listItem6.addEventListener('click', () => {
 
     'use strict';
     numAnswers = 6;
-    createAnswersList(numAnswers, divAnchorAnswers);
-    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
+    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
 });
 
 listItem7.addEventListener('click', () => {
 
     'use strict';
     numAnswers = 7;
-    createAnswersList(numAnswers, divAnchorAnswers);
-    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
+    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
 });
 
-// ======================================================================
 // ======================================================================
 // creation dialog
 
@@ -94,6 +89,8 @@ dialog.querySelector('.create').addEventListener('click', () => {
     // addTodoSubject(subject, description);
 
     textareaQuestion.value = '';
+
+    addQuestion();  // <========== NEU
 
     dialog.close();
 });
@@ -164,6 +161,46 @@ var subjectsList = [];
 //    });
 //}
 
+function addQuestion() {
+
+    'use strict';
+
+    // build firebase reference string
+
+    // später ...muss erst die Infos einsammeln ...........
+
+
+
+    //    var refstring = 'questions';
+    //    var newItemRef = db.ref(refstring).push();
+    //    newItemRef.set ({ "name" : name, "description" : description }, function (error) {
+    //        if (error) {
+    //            console.log("Subject could not be saved: " + error);
+    //
+    //        } else {
+    //            console.log("Subject saved successfully.");
+    //        }
+    //    });
+
+    console.log("Frage: " + textareaQuestion.value);
+
+    var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
+    for (var i = 0; i < childrenAnswers.length; i++) {
+        console.log("Antwort: " + childrenAnswers[i].value);
+    }
+
+    var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-js-checkbox');
+    for (var i = 0; i < childrenCorrectAnswers.length; i++) {
+
+        console.log("Boolean1: " + childrenCorrectAnswers[i]);
+
+       // console.log("Boolean2: " + childrenCorrectAnswers[i].value);
+
+    }
+
+}
+
+
 function createAnswersList(number, outerDiv) {
 
     'use strict';
@@ -199,12 +236,6 @@ function createAnswersList(number, outerDiv) {
     componentHandler.upgradeDom();
 }
 
-
-//<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="iOS">
-//    <input type="checkbox" id="iOS" class="mdl-checkbox__input" />
-//    <span class="mdl-checkbox__label">iOS</span> <!-- Checkbox Label -->
-//</label>
-
 function createAnswersToCheckboxesList(number, outerDiv) {
 
     'use strict';
@@ -234,4 +265,21 @@ function createAnswersToCheckboxesList(number, outerDiv) {
     }
 
     componentHandler.upgradeDom();
+}
+
+function updateNumAnswersDisplay(number, label) {
+
+    'use strict';
+
+    label.innerHTML = '';
+    var textnode = document.createTextNode('' + number);  // create new text node
+    label.appendChild(textnode);  // insert text into <label> node
+}
+
+function updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers) {
+
+    'use strict';
+    updateNumAnswersDisplay(numAnswers, labelNumAnswers);
+    createAnswersList(numAnswers, divAnchorAnswers);
+    createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
 }
