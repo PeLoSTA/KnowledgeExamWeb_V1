@@ -15,7 +15,7 @@
 
         <h5>Subjects - Variant 5 - About Questions</h5>
 
-        <dialog id="dialogQuestion"  class="mdl-dialog" style="width: 500px">
+        <dialog id="dialogQuestion"  class="mdl-dialog" style="width: 800px">
 
             <div>
 
@@ -27,12 +27,12 @@
                 </div>
 
                 <div class="mdl-textfield mdl-js-textfield">
-                    <textarea class="mdl-textfield__input" type="text" rows= "2" id="sample5" ></textarea>
-                    <label class="mdl-textfield__label" for="sample5">...</label>
+                    <textarea class="mdl-textfield__input" type="text" rows= "2" id="textareaQuestion" ></textarea>
+                    <label class="mdl-textfield__label" for="textareaQuestion">...</label>
                 </div>
 
                 <div>
-                    <label id="labelNumAnswers"  class="mdl-textfield mdl-js-textfield">Anzahl Antworten</label>
+                    <label id='labelNumAnswers'  class="mdl-textfield mdl-js-textfield">Anzahl der Antworten:</label>
 
                     <button id="demo-menu-lower-left" class="mdl-button mdl-js-button mdl-button--icon">
                         <i class="material-icons">more_vert</i>
@@ -45,28 +45,31 @@
                         <li id="list-num-answers-5" class="mdl-menu__item">5</li>
                         <li id="list-num-answers-6" class="mdl-menu__item">6</li>
                         <li id="list-num-answers-7" class="mdl-menu__item">7</li>
-                        <li id="list-num-answers-8" class="mdl-menu__item">8</li>
-                        <li id="list-num-answers-9" class="mdl-menu__item">9</li>
                     </ul>
+
+                    <label id='labelNumAnswers2'  class="mdl-textfield mdl-js-textfield" style="margin-left: 10px; width: 50px" >2</label>
                 </div>
 
                 <div id="anchorAnswers">
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" type="text" rows= "1" id="sample5" ></textarea>
-                        <label class="mdl-textfield__label" for="sample5">...</label>
-                    </div>
-
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" type="text" rows= "1" id="sample5" ></textarea>
-                        <label class="mdl-textfield__label" for="sample5">...</label>
-                    </div>
-
-                    <div class="mdl-textfield mdl-js-textfield">
-                        <textarea class="mdl-textfield__input" type="text" rows= "1" id="sample5" ></textarea>
-                        <label class="mdl-textfield__label" for="sample5">...</label>
-                    </div>
                 </div>
 
+                <div>
+                    <label class="mdl-textfield mdl-js-textfield">Richtige Antwort(en):</label>
+                </div>
+
+                <div id="anchorCorrectAnswers">
+
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="android">
+                        <input type="checkbox" id="android" class="mdl-checkbox__input" />
+                        <span class="mdl-checkbox__label">Android</span> <!-- Checkbox Label -->
+                    </label>
+
+                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="iOS">
+                        <input type="checkbox" id="iOS" class="mdl-checkbox__input" />
+                        <span class="mdl-checkbox__label">iOS</span> <!-- Checkbox Label -->
+                    </label>
+
+                </div>
 
                 <div class="mdl-dialog__actions" style="width: 350px">
                     <button type="button" class="mdl-button create">Add</button>
