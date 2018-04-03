@@ -31,43 +31,55 @@ createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
 listItem2.addEventListener('click', () => {
 
     'use strict';
-    numAnswers = 2;
-    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    if (numAnswers != 2) {
+        numAnswers = 2;
+        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    }
 });
 
 listItem3.addEventListener('click', () => {
 
     'use strict';
-    numAnswers = 3;
-    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    if (numAnswers != 3) {
+        numAnswers = 3;
+        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    }
 });
 
 listItem4.addEventListener('click', () => {
 
     'use strict';
-    numAnswers = 4;
-    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    if (numAnswers != 4) {
+        numAnswers = 4;
+        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    }
 });
 
 listItem5.addEventListener('click', () => {
 
     'use strict';
-    numAnswers = 5;
-    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    if (numAnswers != 5) {
+        numAnswers = 5;
+        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    }
 });
 
 listItem6.addEventListener('click', () => {
 
     'use strict';
-    numAnswers = 6;
-    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    if (numAnswers != 6) {
+        numAnswers = 6;
+        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    }
 });
 
 listItem7.addEventListener('click', () => {
 
     'use strict';
-    numAnswers = 7;
-    updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    if (numAnswers != 7) {
+        numAnswers = 7;
+        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
+    }
 });
 
 // ======================================================================
@@ -79,20 +91,20 @@ var dialog = document.getElementById('dialogQuestion');
 if (! dialog.showModal) {
     dialogPolyfill.registerDialog(dialog);
 }
+else {
+    console.log("No polyfill support necessary");
+}
 
 dialog.querySelector('.create').addEventListener('click', () => {
 
     var question = textareaQuestion.value;
-
     console.log("Question: " + textareaQuestion.value);
 
     // addTodoSubject(subject, description);
 
-    textareaQuestion.value = '';
-
-    addQuestion();  // <========== NEU
-
+    addQuestion();
     dialog.close();
+    clearDialog ();
 });
 
 dialog.querySelector('.cancel').addEventListener('click', () => {
@@ -100,6 +112,28 @@ dialog.querySelector('.cancel').addEventListener('click', () => {
     dialog.close();
 });
 
+
+function clearDialog() {
+
+    'use strict';
+
+    // clearing question text
+    textareaQuestion.value = '';
+
+    // clearing answers
+    var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
+    for (var i = 0; i < childrenAnswers.length; i++) {
+        childrenAnswers[i].value = '';
+    }
+
+    // unchecking checkboxes
+    var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-checkbox');
+    for (var i = 0; i < childrenCorrectAnswers.length; i++) {
+
+        var label = childrenCorrectAnswers[i];
+        label.MaterialCheckbox.uncheck();
+    }
+}
 
 // ======================================================================
 // question dialog
@@ -161,35 +195,76 @@ var subjectsList = [];
 //    });
 //}
 
+//function addQuestion() {
+//
+//    'use strict';
+//
+//    // build firebase reference string
+//
+//    // später ...muss erst die Infos einsammeln ...........
+//
+//
+//
+//    //    var refstring = 'questions';
+//    //    var newItemRef = db.ref(refstring).push();
+//    //    newItemRef.set ({ "name" : name, "description" : description }, function (error) {
+//    //        if (error) {
+//    //            console.log("Subject could not be saved: " + error);
+//    //
+//    //        } else {
+//    //            console.log("Subject saved successfully.");
+//    //        }
+//    //    });
+//
+//    console.log("Frage: " + textareaQuestion.value);
+//
+//    var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
+//    for (var i = 0; i < childrenAnswers.length; i++) {
+//        console.log("    Antwort: " + childrenAnswers[i].value);
+//    }
+//
+//    var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-checkbox');
+//
+//    for (var i = 0; i < childrenCorrectAnswers.length; i++) {
+//
+//        var label = childrenCorrectAnswers[i];
+//        var classAttributes = label.getAttribute("class");
+//
+//        var result = classAttributes.includes('is-checked');
+//        console.log("    is-checked: " + result);
+//    }
+//}
+
+
 function addQuestion() {
 
     'use strict';
 
-    // build firebase reference string
-
-    // später ...muss erst die Infos einsammeln ...........
-
-
-
-    //    var refstring = 'questions';
-    //    var newItemRef = db.ref(refstring).push();
-    //    newItemRef.set ({ "name" : name, "description" : description }, function (error) {
-    //        if (error) {
-    //            console.log("Subject could not be saved: " + error);
-    //
-    //        } else {
-    //            console.log("Subject saved successfully.");
-    //        }
-    //    });
+    var refQuestion = db.ref('questions').push();
 
     console.log("Frage: " + textareaQuestion.value);
+    var question = textareaQuestion.value;
 
     var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
+
+    // GENERELL: MIT ODER OHNE FEHLERBAHENDLAUNG ?!?!?!??!
+
+    refQuestion.set ({ "question" : question, "num-answers" : childrenAnswers.length }, function (error) {
+        if (error) {
+            console.log("Question could not be saved: " + error);
+        }
+    });
+
+    var refAnswers = refQuestion.child('answers').push();
     for (var i = 0; i < childrenAnswers.length; i++) {
-        console.log("    Antwort: " + childrenAnswers[i].value);
+        // console.log("    Antwort: " + childrenAnswers[i].value);
+        refAnswers.child('answer' + (i+1)).set(childrenAnswers[i].value);
     }
 
     var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-checkbox');
+    var refCorrectAnswers = refQuestion.child('correct-answers').push();
+
+    var numCorrectAnswers = 0;
 
     for (var i = 0; i < childrenCorrectAnswers.length; i++) {
 
@@ -197,10 +272,22 @@ function addQuestion() {
         var classAttributes = label.getAttribute("class");
 
         var result = classAttributes.includes('is-checked');
-        console.log("    is-checked: " + result);
-    }
-}
+        // console.log("    is-checked: " + result);
 
+        if (result === true) {
+            numCorrectAnswers ++;
+            refCorrectAnswers.child('answer' + (i+1)).set(true);
+        }
+    }
+
+//    refQuestion.set ({ "num-correct-answers" : numCorrectAnswers }, function (error) {
+//        if (error) {
+//            console.log("Question could not be saved: " + error);
+//        }
+//    });
+
+    refQuestion.child('num-correct-answers').set(numCorrectAnswers);
+}
 
 function createAnswersList(number, outerDiv) {
 
