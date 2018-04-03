@@ -186,18 +186,19 @@ function addQuestion() {
 
     var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
     for (var i = 0; i < childrenAnswers.length; i++) {
-        console.log("Antwort: " + childrenAnswers[i].value);
+        console.log("    Antwort: " + childrenAnswers[i].value);
     }
 
-    var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-js-checkbox');
+    var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-checkbox');
+
     for (var i = 0; i < childrenCorrectAnswers.length; i++) {
 
-        console.log("Boolean1: " + childrenCorrectAnswers[i]);
+        var label = childrenCorrectAnswers[i];
+        var classAttributes = label.getAttribute("class");
 
-       // console.log("Boolean2: " + childrenCorrectAnswers[i].value);
-
+        var result = classAttributes.includes('is-checked');
+        console.log("    is-checked: " + result);
     }
-
 }
 
 
