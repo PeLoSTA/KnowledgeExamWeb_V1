@@ -246,18 +246,10 @@ function addQuestion() {
     var question = textareaQuestion.value;
 
     var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
-
-    // GENERELL: MIT ODER OHNE FEHLERBAHENDLAUNG ?!?!?!??!
-
-    refQuestion.set ({ "question" : question, "num-answers" : childrenAnswers.length }, function (error) {
-        if (error) {
-            console.log("Question could not be saved: " + error);
-        }
-    });
+    refQuestion.set ({ "question" : question, "num-answers" : childrenAnswers.length });
 
     var refAnswers = refQuestion.child('answers').push();
     for (var i = 0; i < childrenAnswers.length; i++) {
-        // console.log("    Antwort: " + childrenAnswers[i].value);
         refAnswers.child('answer' + (i+1)).set(childrenAnswers[i].value);
     }
 
@@ -265,26 +257,17 @@ function addQuestion() {
     var refCorrectAnswers = refQuestion.child('correct-answers').push();
 
     var numCorrectAnswers = 0;
-
     for (var i = 0; i < childrenCorrectAnswers.length; i++) {
 
         var label = childrenCorrectAnswers[i];
         var classAttributes = label.getAttribute("class");
 
         var result = classAttributes.includes('is-checked');
-        // console.log("    is-checked: " + result);
-
         if (result === true) {
             numCorrectAnswers ++;
             refCorrectAnswers.child('answer' + (i+1)).set(true);
         }
     }
-
-//    refQuestion.set ({ "num-correct-answers" : numCorrectAnswers }, function (error) {
-//        if (error) {
-//            console.log("Question could not be saved: " + error);
-//        }
-//    });
 
     refQuestion.child('num-correct-answers').set(numCorrectAnswers);
 }
