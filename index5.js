@@ -186,6 +186,8 @@ function addQuestion() {
         if (result === true) {
             numCorrectAnswers ++;
             refCorrectAnswers.child('answer' + (i+1)).set(true);
+        } else {
+            refCorrectAnswers.child('answer' + (i+1)).set(false);
         }
     }
 

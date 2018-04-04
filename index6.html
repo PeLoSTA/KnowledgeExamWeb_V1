@@ -16,9 +16,51 @@
 
         <br/>
 
-        <button id="btnListQuestions" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-            List Questions
-        </button>
+        <div>
+            <button id="btnListQuestions" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                List Questions
+            </button>
+        </div>
+
+        <br/>
+
+        <div>
+            <table id="tableSubjects" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                <thead>
+                    <tr>
+                        <th class="mdl-data-table__cell--non-numeric">Question</th>
+                        <th class="mdl-data-table__cell--non-numeric">Number of Answers</th>
+                        <th class="mdl-data-table__cell--non-numeric">Answers</th>
+
+                    </tr>
+                </thead>
+                <tbody id="tableSubjectsBody" >
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">Mathe</td>
+                        <td class="mdl-data-table__cell--non-numeric">3</td>
+                        <td class="mdl-data-table__cell--non-numeric">
+                            <div class="mdl-selectfield mdl-js-selectfield">
+                                <select class="mdl-selectfield__select" id="professsion1" >
+                                    <option value="option1">Dies ist eine sehr lange Antwort</option>
+                                    <option value="option2">option 2</option>
+                                    <option value="option3">option 3</option>
+                                </select>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="mdl-data-table__cell--non-numeric">C++</td>
+                        <td class="mdl-data-table__cell--non-numeric">Beyond C</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <br/>
+
+
 
         <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
         <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-app.js"></script>    -->
