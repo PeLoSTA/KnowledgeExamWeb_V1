@@ -8,141 +8,25 @@
 /*eslint no-console: [ "error", { allow: [  "log", "warn", "error"]}] */
 
 // retrieve HTML elements
-var btnEnterQuestion = document.getElementById('btnEnterQuestion');
+var btnListQuestions = document.getElementById('btnListQuestions');
 
-var listItem2 = document.getElementById('list-num-answers-2');
-var listItem3 = document.getElementById('list-num-answers-3');
-var listItem4 = document.getElementById('list-num-answers-4');
-var listItem5 = document.getElementById('list-num-answers-5');
-var listItem6 = document.getElementById('list-num-answers-6');
-var listItem7 = document.getElementById('list-num-answers-7');
+// list of all questions
+var questionsList = [];
 
-var divAnchorAnswers = document.getElementById('anchorAnswers');
-var divCorrectAnswers = document.getElementById('anchorCorrectAnswers');
-
-var textareaQuestion = document.getElementById('textareaQuestion');
-
-var labelNumAnswers = document.getElementById('labelNumAnswers2');
-
-var numAnswers = 2;
-createAnswersList(numAnswers, divAnchorAnswers);
-createAnswersToCheckboxesList(numAnswers, divCorrectAnswers);
-
-listItem2.addEventListener('click', () => {
-
-    'use strict';
-    if (numAnswers != 2) {
-        numAnswers = 2;
-        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
-    }
-});
-
-listItem3.addEventListener('click', () => {
-
-    'use strict';
-    if (numAnswers != 3) {
-        numAnswers = 3;
-        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
-    }
-});
-
-listItem4.addEventListener('click', () => {
-
-    'use strict';
-    if (numAnswers != 4) {
-        numAnswers = 4;
-        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
-    }
-});
-
-listItem5.addEventListener('click', () => {
-
-    'use strict';
-    if (numAnswers != 5) {
-        numAnswers = 5;
-        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
-    }
-});
-
-listItem6.addEventListener('click', () => {
-
-    'use strict';
-    if (numAnswers != 6) {
-        numAnswers = 6;
-        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
-    }
-});
-
-listItem7.addEventListener('click', () => {
-
-    'use strict';
-    if (numAnswers != 7) {
-        numAnswers = 7;
-        updateDialogDisplay(numAnswers, labelNumAnswers, divAnchorAnswers, divCorrectAnswers);
-    }
-});
 
 // ======================================================================
 // creation dialog
 
-// var dialog = document.querySelector('dialog');
-var dialog = document.getElementById('dialogQuestion');
-
-if (! dialog.showModal) {
-    dialogPolyfill.registerDialog(dialog);
-}
-else {
-    console.log("No polyfill support necessary");
-}
-
-dialog.querySelector('.create').addEventListener('click', () => {
-
-    var question = textareaQuestion.value;
-    console.log("Question: " + textareaQuestion.value);
-
-    // addTodoSubject(subject, description);
-
-    addQuestion();
-    dialog.close();
-    clearDialog ();
-});
-
-dialog.querySelector('.cancel').addEventListener('click', () => {
-
-    dialog.close();
-});
-
-
-function clearDialog() {
-
-    'use strict';
-
-    // clearing question text
-    textareaQuestion.value = '';
-
-    // clearing answers
-    var childrenAnswers = divAnchorAnswers.getElementsByTagName ('textarea');
-    for (var i = 0; i < childrenAnswers.length; i++) {
-        childrenAnswers[i].value = '';
-    }
-
-    // unchecking checkboxes
-    var childrenCorrectAnswers = divCorrectAnswers.getElementsByClassName ('mdl-checkbox');
-    for (var i = 0; i < childrenCorrectAnswers.length; i++) {
-
-        var label = childrenCorrectAnswers[i];
-        label.MaterialCheckbox.uncheck();
-    }
-}
 
 // ======================================================================
 // question dialog
 
-btnEnterQuestion.addEventListener('click', () => {
+btnListQuestions.addEventListener('click', () => {
 
     'use strict';
 
-    dialog.showModal();
+    console.log("Frage: "   );
+    readQuestionsList();
 });
 
 // ======================================================================
@@ -150,11 +34,98 @@ btnEnterQuestion.addEventListener('click', () => {
 // get a reference to the database service
 var db = firebase.database();
 
-// local state of current 'todo' items list
-var subjectsList = [];
 
 // ======================================================================
 // connect event handler functions
+
+
+function readQuestionsList() {
+
+    'use strict';
+    questionsList = [];
+
+    var refstring = '/questions';
+    db.ref(refstring).once('value').then(function (snapshot) {
+
+        snapshot.forEach(function (childSnapshot) {
+
+            console.log('----------------------------------------------------');
+
+            let obj = childSnapshot.val();
+            let numAnswers = obj['num-answers'];
+            let numCorrectAnswers = obj['num-correct-answers'];
+            let question = obj['question'];
+
+            console.log('Question:          ' + question);
+            console.log('  NumAnswers:        ' + numAnswers);
+            console.log('  NumCorrectAnswers: ' + numCorrectAnswers);
+
+            let answers = obj['answers'];
+            let parentKey = Object.keys(answers);
+            let value = answers[parentKey[0]];
+
+            let childKeys = Object.keys(value);
+            for (var k = 0; k < childKeys.length; k++) {
+
+                let key = childKeys[k];
+                let answer = value[key];
+                console.log('    Answer: ' + answer);
+            }
+
+            let correctAnswers = obj['correct-answers'];
+            parentKey = Object.keys(correctAnswers);
+            value = correctAnswers[parentKey[0]];
+
+            childKeys = Object.keys(value);
+            for (var j = 0; j < childKeys.length; j++) {
+
+                let key = childKeys[j];
+                let answer = value[key];
+                console.log('    Correct Answer: ' + answer);
+            }
+        });
+
+        // list of ToDo items updated, fire 'display list' event
+        // var event = new CustomEvent(FirebaseDataEvent, { detail: kind });
+        // window.dispatchEvent(event);
+
+        //        htmlListSubjects.innerHTML = '';
+        //
+        //        for (var i = 0; i < subjectsList.length; i++) {
+        //
+        //            // build list item string
+        //            var linePrefix = (i < 10) ? '  ' : (i < 100) ? ' ' : '',
+        //                line = linePrefix + (i+1) + ': ' + subjectsList[i];
+        //
+        //            // add a 'material design lite' node to a list dynamically
+        //            var node = document.createElement('li');         // create a <li> node
+        //            node.setAttribute('class', 'mdl-list__item');    // set an attribute
+        //
+        //            var span = document.createElement('span');       // create a <span> node
+        //            span.setAttribute('class', 'mdl-list__item-primary-content');
+        //
+        //            var textnode = document.createTextNode(line);    // create a text node
+        //            node.appendChild(span);                          // append <span> to <li>
+        //            span.appendChild(textnode);                      // append text to <span>
+        //            htmlListSubjects.appendChild(node);              // append <li> to <ul>
+        //        }
+        //
+        //        componentHandler.upgradeDom();
+    });
+}
+
+
+
+
+
+
+
+
+
+// ======================================================================
+
+
+// RESTE
 
 function addQuestion() {
 
