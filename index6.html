@@ -25,41 +25,43 @@
         <br/>
 
         <div>
-            <table id="tableSubjects" class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-                <thead>
-                    <tr>
-                        <th class="mdl-data-table__cell--non-numeric">Question</th>
-                        <th class="mdl-data-table__cell--non-numeric">Number of Answers</th>
-                        <th class="mdl-data-table__cell--non-numeric">Answers</th>
+            <ul class="demo-list-control mdl-list">
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-secondary-action">
+                        <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="list-checkbox-1">
+                            <input type="checkbox" id="list-checkbox-1" class="mdl-checkbox__input" checked />
+                        </label>
+                    </span>
+                    <span class="mdl-list__item-primary-content">
+                        Text fields are a common feature of most user interfaces, regardless of a site's content or function. Their design and use is therefore an important factor in the overall user experience. See the text field component's Material Design specifications page for details. Text fields are a common feature of most user interfaces, regardless of a site's content or function. Their design and use is therefore an important factor in the overall user experience. See the text field component's Material Design specifications page for details.
+                    </span>
+                </li>
+                <li class="mdl-list__item">
+                    <span class="mdl-list__item-secondary-action">
+                        <label class="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" for="list-option-1">
+                            <input type="radio" id="list-option-1" class="mdl-radio__button" name="options" value="1" checked />
+                        </label>
+                    </span>
+                    <span class="mdl-list__item-primary-content">
+                        Aaron Paul
+                    </span>
+                </li>
+                <li class="mdl-list__item">
 
-                    </tr>
-                </thead>
-                <tbody id="tableSubjectsBody" >
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">Mathe</td>
-                        <td class="mdl-data-table__cell--non-numeric">3</td>
-                        <td class="mdl-data-table__cell--non-numeric">
-                            <div class="mdl-selectfield mdl-js-selectfield">
-                                <select class="mdl-selectfield__select" id="professsion1" >
-                                    <option value="option1">Dies ist eine sehr lange Antwort</option>
-                                    <option value="option2">option 2</option>
-                                    <option value="option3">option 3</option>
-                                </select>
-
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="mdl-data-table__cell--non-numeric">C++</td>
-                        <td class="mdl-data-table__cell--non-numeric">Beyond C</td>
-                    </tr>
-                </tbody>
-            </table>
+                    <span class="mdl-list__item-secondary-action">
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-1">
+                            <input type="checkbox" id="list-switch-1" class="mdl-switch__input" checked />
+                        </label>
+                    </span>
+                    <span class="mdl-list__item-primary-content">
+                        Bob Odenkirk
+                    </span>
+                </li>
+            </ul>
         </div>
 
 
         <br/>
-
 
 
         <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>

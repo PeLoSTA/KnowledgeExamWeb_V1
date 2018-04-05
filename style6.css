@@ -3,3 +3,13 @@ body {
     padding-top:50px;
     margin: 0 auto;
 }
+
+
+#mdl-switch__input {
+  width: 100px;
+}
+
+.mdl-switch {
+    width: 50px;
+}
+
